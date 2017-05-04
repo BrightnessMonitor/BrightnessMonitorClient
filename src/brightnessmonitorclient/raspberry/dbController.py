@@ -5,22 +5,33 @@ import sqlite3 as lite
 import sys
 import time
 
+
+sqlite_file = 'test.db'
 con = None
 cur = None
-sqlite_file = 'test.db'
 
 
-def create_db():
+def drop_recreate_db():
     con = lite.connect(sqlite_file)
     with con:
         cur = con.cursor()
         cur.execute("DROP TABLE IF EXISTS data")
+        print "Table dropped"
         cur.execute("CREATE TABLE data (time REAL, data INTEGER);")
         print "Table created"
         con.commit()
 
 
-def commit_to_db(rawdata):
+def create():
+    con = lite.connect(sqlite_file)
+    with con:
+        cur = con.cursor()
+        cur.execute("CREATE TABLE IF NOT EXISTS data (time REAL, data INTEGER);")
+        print "Table created"
+        con.commit()
+
+
+def insert(rawdata):
     try:
         con = lite.connect(sqlite_file)
         cur = con.cursor()
@@ -33,3 +44,14 @@ def commit_to_db(rawdata):
         sys.exit(1)
     finally:
         con.close()
+
+def retrieve():
+    data = []
+    con = lite.connect(sqlite_file)
+    with con:
+        cur = con.cursor()
+        cur.execute('SELECT * FROM data')
+        table = cur.fetchall()
+        for row in table:
+            data.append(row)
+    return data
