@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import datetime
 
 # converts given seconds passed since 1 Jan 1970
