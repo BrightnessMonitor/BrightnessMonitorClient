@@ -40,7 +40,6 @@ class myThread(threading.Thread):
                 temp_data = retrieve()
                 drop_recreate_db()
                 pool_sema.release()
-                print "upload data"
                 for row in temp_data:
                     upload(row[1], row[0])
             if killer.kill_now:
