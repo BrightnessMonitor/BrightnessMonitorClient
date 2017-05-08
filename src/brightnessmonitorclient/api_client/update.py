@@ -5,14 +5,17 @@ import json
 from brightnessmonitorclient.config.read_config import read_config
 
 
-def upload(value, dateNow):
+def upload(value, time):
     '''
+    Upload the value & time to the website
     
     Args:
         value: The value witch should be upload
-        datetime: The datetime witch should be upload
+        time: The datetime witch should be upload
 
     Returns:
+        True if the upload was successfull
+        False if the upload was not successfull
 
     '''
     config = read_config()
@@ -24,7 +27,7 @@ def upload(value, dateNow):
     url = 'http://localhost:8000/api/device/'
     data = {
         "uuid": config['uuid'],
-        "datetime": dateNow,
+        "datetime": time,
         "value": value
     }
     response = requests.post(url,
