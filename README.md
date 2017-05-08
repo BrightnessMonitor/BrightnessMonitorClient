@@ -49,6 +49,7 @@ Example:
 ```bash
 [Login]
 host = localhost
+protocol = https
 token = YourUserToken
 uuid = DeviceUUID
 ```

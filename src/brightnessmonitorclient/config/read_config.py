@@ -20,6 +20,7 @@ def read_config():
 
     return {
         'host': Config.get('Login', 'host'),
+        'protocol': Config.get('Login', 'protocol'),
         'token': Config.get('Login', 'token'),
         'uuid': Config.get('Login', 'uuid'),
     }

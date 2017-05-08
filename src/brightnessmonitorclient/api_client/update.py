@@ -20,11 +20,7 @@ def upload(value, time):
     '''
     config = read_config()
 
-
-
-
-
-    url = 'http://localhost:8000/api/device/'
+    url = config['protocol'] + "://" + config['host'] + "/api/device/"
     data = {
         "uuid": config['uuid'],
         "datetime": time,
@@ -40,3 +36,5 @@ def upload(value, time):
         return True
     else:
         return False
+
+upload(22, datetime.now())
