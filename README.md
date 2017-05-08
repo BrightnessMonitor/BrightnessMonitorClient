@@ -35,3 +35,20 @@ And add for execute every 15 minutes:
 ```bash
 */15 * * * * python /usr/local/lib/python2.7/dist-packages/brightnessmonitorclient
 ```
+
+## Config
+
+To edit:
+
+```bash
+sudo nano /etc/brightnessmonitorclient.conf
+```
+
+Example:
+
+```bash
+[Login]
+host = localhost
+token = YourUserToken
+uuid = DeviceUUID
+```
