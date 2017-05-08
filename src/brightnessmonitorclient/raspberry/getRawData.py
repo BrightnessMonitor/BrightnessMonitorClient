@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import RPi.GPIO as GPIO, time, os
 
@@ -17,19 +18,3 @@ def RCtime(GPIOPIN):
     while (GPIO.input(GPIOPIN) == GPIO.LOW):
         reading += 1
     return reading
-
-
-
-#  timing = RCtime(GPIOPIN)
-#if timing < 500:
-#    print "sehr hell"
-#elif timing < 1000:
-#    print "hell"
-#elif timing < 2000:
-#    print "schattig"
-#elif timing < 10000:
-#    print "sehr schattig"
-#elif timing < 150000:
-#    print "fast dunkel"
-#else:
-#    print "dunkel"
