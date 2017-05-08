@@ -43,8 +43,8 @@ def insert(rawdata):
     try:
         con = lite.connect(sqlite_file)
         cur = con.cursor()
-        #inserts time and raw data into database
-        #time represents the number of seconds since Jan 1, 1970 00:00:00
+        # inserts time and raw data into database
+        # time represents the number of seconds since Jan 1, 1970 00:00:00
         cur.execute("INSERT INTO data VALUES (?, ?)", (int(time.time()), rawdata))
         con.commit()
     except lite.Error, e:

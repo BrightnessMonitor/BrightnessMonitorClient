@@ -1,3 +1,4 @@
+import urllib2
 from datetime import datetime
 import requests
 import json
@@ -10,12 +11,12 @@ def upload(value, time):
     Upload the value & time to the website
     
     Args:
-        value: The value witch should be upload
-        time: The datetime witch should be upload
+        value: The value wich should be uploaded
+        time: The datetime wich should be uploaded
 
     Returns:
-        True if the upload was successfull
-        False if the upload was not successfull
+        True if the upload was successful
+        False if the upload was not successful
 
     '''
     config = read_config()
@@ -37,4 +38,9 @@ def upload(value, time):
     else:
         return False
 
-upload(22, datetime.now())
+def internet_on():
+    try:
+        urllib2.urlopen('http://google.de', timeout=1)
+        return True
+    except urllib2.URLError as err:
+        return False
