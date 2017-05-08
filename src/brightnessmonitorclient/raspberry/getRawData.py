@@ -8,7 +8,7 @@ GPIOPIN = 11
 GPIO.setmode(GPIO.BCM)
 
 
-def RCtime(GPIOPIN):
+def RCtime():
     reading = 0
     GPIO.setup(GPIOPIN, GPIO.OUT)
     GPIO.output(GPIOPIN, GPIO.LOW)

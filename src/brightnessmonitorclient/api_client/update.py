@@ -11,8 +11,8 @@ def upload(value, time):
     Upload the value & time to the website
     
     Args:
-        value: The value wich should be uploaded
-        time: The datetime wich should be uploaded
+        value: The value which should be uploaded
+        time: The datetime which should be uploaded
 
     Returns:
         True if the upload was successful
