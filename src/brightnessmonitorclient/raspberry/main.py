@@ -59,11 +59,9 @@ def start():
     while True:
         pool_sema.acquire()
         data = RCtime()
-        #data = 11
         insert(data)
         pool_sema.release()
         print "Current brightness: %i" % data
-        print retrieve()
         time.sleep(measureINTERVAL)
 
         if killer.kill_now:
