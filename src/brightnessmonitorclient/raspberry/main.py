@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import threading
 from dbController import *
-from getRawData import RCtime
+#from getRawData import RCtime
 import signal
 import time
 from brightnessmonitorclient.api_client.update import *
@@ -61,7 +61,8 @@ def start():
     create()
     while True:
         pool_sema.acquire()
-        data = RCtime()
+        #data = RCtime()
+        data=11
         insert(data)
         pool_sema.release()
         print "Current brightness: %i" % data
