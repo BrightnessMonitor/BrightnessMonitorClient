@@ -1,9 +1,5 @@
 sqlite3
-threading
-signal
-time
 urllib2
-requests
 json
 pathlib
 ConfigParser

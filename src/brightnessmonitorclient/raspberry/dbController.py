@@ -6,7 +6,7 @@ import sys
 import time
 
 
-sqlite_file = 'test.db'
+sqlite_file = 'rawdata.db'
 table = 'data'
 vartime = 'time'
 vardata = 'data'
