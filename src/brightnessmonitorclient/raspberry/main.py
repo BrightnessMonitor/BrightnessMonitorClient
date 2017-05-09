@@ -35,7 +35,10 @@ class uploadHandler(threading.Thread):
     def run(self):
         while True:
             print "Wait %i seconds for next upload" % uploadINTERVAL
-            time.sleep(uploadINTERVAL)
+            for i in range(uploadINTERVAL):
+                time.sleep(1)
+                if killer.kill_now:
+                    break
             if internet_on():
                 pool_sema.acquire()
                 success = 0
