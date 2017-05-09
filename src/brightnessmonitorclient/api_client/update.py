@@ -32,6 +32,7 @@ def upload(value, time):
                              headers={'Authorization': 'Token {}'.format(config['token'])}
                              )
     responseContent = json.loads(response._content)
+    print responseContent
 
     if responseContent['status'] == "Success: data saved":
         return True
