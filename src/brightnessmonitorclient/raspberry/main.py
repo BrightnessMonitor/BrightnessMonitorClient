@@ -52,7 +52,7 @@ class uploadHandler(threading.Thread):
                 sys.exit(0)
 
 
-if __name__ == '__main__':
+def start():
     thread1 = uploadHandler()
     thread1.start()
     create()

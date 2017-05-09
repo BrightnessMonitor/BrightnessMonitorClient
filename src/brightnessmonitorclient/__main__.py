@@ -1,6 +1,6 @@
 import argparse
-import brightnessmonitorclient
-from brightnessmonitorclient import __version__
+#import brightnessmonitorclient
+#from brightnessmonitorclient import __version__
 from brightnessmonitorclient.raspberry.main import start
 
 
@@ -9,8 +9,8 @@ def get_parser():
     Creates a new argument parser.
     """
     parser = argparse.ArgumentParser('BrightnessMonitorClient')
-    version = '%(prog)s ' + __version__
-    parser.add_argument('--version', '-v', action='version', version=version)
+    #version = '%(prog)s ' + __version__
+    #parser.add_argument('--version', '-v', action='version', version=version)
     return parser
 
 def main(args=None):
