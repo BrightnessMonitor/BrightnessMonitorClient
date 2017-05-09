@@ -1,5 +1,5 @@
 import urllib2
-from datetime import datetime
+import httplib
 import requests
 import json
 
@@ -38,9 +38,32 @@ def upload(value, time):
     else:
         return False
 
+
 def internet_on():
+    """
+    Check if there is a connection to the website
+    
+    Returns:
+        True == Website is on
+        False == Website is offline
+
+    """
+    config = read_config()
+
+    if config['protocol'] == "https":
+        c = httplib.HTTPSConnection(config['host'])
+    else:
+        c = httplib.HTTPConnection(config['host'])
+
     try:
-        urllib2.urlopen('http://google.de', timeout=1)
+        c.request("GET", "/")
+    except Exception as e:
+        print("Connection error:")
+        print(e)
+        return False
+
+    response = c.getresponse()
+    if response.status == 200:
         return True
-    except urllib2.URLError as err:
+    else:
         return False
