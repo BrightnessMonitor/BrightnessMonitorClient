@@ -47,10 +47,12 @@ class uploadHandler(threading.Thread):
                 pool_sema.acquire()
 
                 fail = 0
+                print "Upload "
                 for row in retrieve():
                     if not upload(row[1], convertback(row[0])):
                         fail += 1
                     print "*",
+                print "\n"
 
                 if fail < 1:
                     print "Upload successful"
