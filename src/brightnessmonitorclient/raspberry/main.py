@@ -6,6 +6,7 @@ from getRawData import RCtime
 import signal
 import time
 from brightnessmonitorclient.api_client.update import *
+from timeConvert import convertback
 
 # Interval in seconds the programm is getting new data
 measureINTERVAL = 5
@@ -41,11 +42,11 @@ class uploadHandler(threading.Thread):
                     break
             if internet_on():
                 pool_sema.acquire()
-                success = 0
+                fail = 0
                 for row in retrieve():
-                    if not upload(row[1], row[0]):
-                        success += 1
-                if success < 1:
+                    if not upload(row[1], convertback(row[0])):
+                        fail += 1
+                if fail < 1:
                     print "Upload successful"
                     drop_recreate_db()
                 pool_sema.release()
