@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import threading
+from sys import stdout
+
 from dbController import *
 from getRawData import RCtime
 import signal
@@ -43,9 +45,13 @@ class uploadHandler(threading.Thread):
             if internet_on():
                 pool_sema.acquire()
                 fail = 0
+                print "Upload "
                 for row in retrieve():
-                    if not upload(row[1], convertback(row[0])):
+                    if not upload(row[1], row[0]):
                         fail += 1
+                        stdout.write(". ")
+                        stdout.flush()
+                stdout.write("\n")
                 if fail < 1:
                     print "Upload successful"
                     drop_recreate_db()
