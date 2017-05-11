@@ -29,7 +29,6 @@ def create():
     with con:
         cur.execute("CREATE TABLE IF NOT EXISTS {table} ({time} INTEGER, {data} INTEGER);".
                     format(table=table, time=vartime, data=vardata))
-        print "Table created"
         con.commit()
 
 
@@ -85,4 +84,3 @@ def delete():
         sys.exit(1)
     with con:
         cur.execute("DROP TABLE IF EXISTS data")
-        print "Table deleted"
