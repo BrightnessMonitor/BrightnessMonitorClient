@@ -50,7 +50,7 @@ class uploadHandler(threading.Thread):
                 for row in retrieve():
                     if not upload(row[1], convertback(row[0])):
                         fail += 1
-                        print "* ",
+                    print "*",
 
                 if fail < 1:
                     print "Upload successful"
