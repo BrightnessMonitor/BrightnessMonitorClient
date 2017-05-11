@@ -47,7 +47,7 @@ class uploadHandler(threading.Thread):
                 fail = 0
                 print "Upload "
                 for row in retrieve():
-                    if not upload(row[1], row[0]):
+                    if not upload(row[1], convertback(row[0])):
                         fail += 1
                         stdout.write(". ")
                         stdout.flush()
