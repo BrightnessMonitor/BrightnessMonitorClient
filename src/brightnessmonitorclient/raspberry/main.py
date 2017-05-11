@@ -42,20 +42,21 @@ class uploadHandler(threading.Thread):
                 time.sleep(1)
                 if killer.kill_now:
                     break
+
             if internet_on():
                 pool_sema.acquire()
+
                 fail = 0
-                print "Upload "
+                print "Upload ",
                 for row in retrieve():
                     if not upload(row[1], convertback(row[0])):
                         fail += 1
-                        stdout.write(". ")
-                        stdout.flush()
-                stdout.write("\n")
+                        print ". ",
+
                 if fail < 1:
                     print "Upload successful"
                     drop_recreate_db()
-                pool_sema.release()
+                    pool_sema.release()
 
             if killer.kill_now:
                 delete()
