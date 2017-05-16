@@ -2,6 +2,12 @@
 
 ## Install
 
+### via install script
+
+```bash
+bash <(wget -qO- https://raw.githubusercontent.com/BrightnessMonitor/BrightnessMonitorClient/master/Scripts/install.sh)
+```
+
 ### via Git
 
 ```bash
