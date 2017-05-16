@@ -22,10 +22,13 @@ sudo sh -c "echo 'protocol = $protocol' > /etc/brightnessmonitorclient.conf"
 sudo sh -c "echo 'token = $token' > /etc/brightnessmonitorclient.conf"
 sudo sh -c "echo 'uuid = $uuid' > /etc/brightnessmonitorclient.conf"
 
-# touch database & set write permission
-sudo mkdir /var/db/
-sudo touch /var/db/BrightnessMonitor.sqlite
-chown brightnessmonitor:brightnessmonitor /var/db/BrightnessMonitor.sqlite
+# create database folder & set write permission
+sudo mkdir -p /var/db/BrightnessMonitor
+sudo chown -R brightnessmonitor:brightnessmonitor /var/db/BrightnessMonitor
+
+# touch log & set permission
+sudo touch /var/log/brightnessmonitorclient.log
+sudo chown brightnessmonitor:brightnessmonitor /var/log/brightnessmonitorclient.log
 
 # add service
 sudo wget https://raw.githubusercontent.com/BrightnessMonitor/BrightnessMonitorClient/master/Scripts/BrightnessMonitor.service -O /lib/systemd/system/BrightnessMonitor.service

@@ -6,7 +6,7 @@ import sys
 import time
 
 
-sqlite_file = '/var/db/BrightnessMonitor.sqlite'
+sqlite_file = '/var/db/BrightnessMonitor/db.sqlite'
 table = 'data'
 vartime = 'time'
 vardata = 'data'
