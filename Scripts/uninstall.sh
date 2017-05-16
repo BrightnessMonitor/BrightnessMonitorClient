@@ -12,5 +12,5 @@ sudo systemctl daemon-reload
 sudo rm /var/db/BrightnessMonitor.sqlite
 
 # remove user & group
-sudo userdel brightnessmonitor
-sudo groupdel brightnessmonitor
+sudo userdel brightnes
+sudo groupdel brightnes
