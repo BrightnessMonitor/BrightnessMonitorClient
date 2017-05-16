@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install programm
-sudo pip install git+git://github.com/BrightnessMonitor/BrightnessMonitorClient.git
+sudo pip install git+git://github.com/BrightnessMonitor/BrightnessMonitorClient.git --upgrade --force
 
 # create user
 sudo adduser --system --no-create-home --group brightnessmonitor
