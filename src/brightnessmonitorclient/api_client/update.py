@@ -5,6 +5,9 @@ import json
 
 from brightnessmonitorclient.config.read_config import read_config
 
+longitude = 0
+latitude = 0
+
 
 def upload(value, time):
     '''
@@ -34,6 +37,9 @@ def upload(value, time):
     responseContent = json.loads(response._content)
 
     if responseContent['status'] == "Success: data saved":
+        longitude = responseContent['latitude']
+        latitude = responseContent['longitude']
+
         return True
     else:
         return False
@@ -64,6 +70,30 @@ def internet_on():
 
     response = c.getresponse()
     if response.status == 200:
+        return True
+    else:
+        return False
+
+
+def set_location(time):
+    config = read_config()
+
+    url = config['protocol'] + "://" + config['host'] + "/api/device/"
+    data = {
+        "uuid": config['uuid'],
+        "datetime": time,
+        "value": -1
+    }
+    response = requests.post(url,
+                             data=data,
+                             headers={'Authorization': 'Token {}'.format(config['token'])}
+                             )
+    responseContent = json.loads(response._content)
+
+    longitude = responseContent['latitude']
+    latitude = responseContent['longitude']
+
+    if responseContent['status'] == "Show device information":
         return True
     else:
         return False
