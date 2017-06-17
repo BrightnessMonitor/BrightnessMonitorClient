@@ -7,7 +7,7 @@ import signal
 import time
 from brightnessmonitorclient.api_client.update import *
 from timeConvert import convertback
-from daylight import checkDaylight
+from daylight import *
 
 # Interval in seconds the programm is getting new data
 measureINTERVAL = 5
@@ -67,6 +67,7 @@ def start():
     thread1 = uploadHandler()
     thread1.start()
     create()
+    setLocation()
     while True:
         while checkDaylight():
             pool_sema.acquire()
