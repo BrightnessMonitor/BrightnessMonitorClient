@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import threading
-from sys import stdout
-
 from dbController import *
 from getRawData import RCtime
 import signal
 import time
 from brightnessmonitorclient.api_client.update import *
 from timeConvert import convertback
+from daylight import checkDaylight
 
 # Interval in seconds the programm is getting new data
 measureINTERVAL = 5
@@ -69,13 +68,14 @@ def start():
     thread1.start()
     create()
     while True:
-        pool_sema.acquire()
-        data = RCtime()
-        insert(data)
-        pool_sema.release()
-        print "Current brightness: %i" % data
-        time.sleep(measureINTERVAL)
+        while checkDaylight():
+            pool_sema.acquire()
+            data = RCtime()
+            insert(data)
+            pool_sema.release()
+            print "Current brightness: %i" % data
+            time.sleep(measureINTERVAL)
 
-        if killer.kill_now:
-            print "Please let the program finish or data loss will occur!"
-            break
+            if killer.kill_now:
+                print "Please let the program finish or data loss will occur!"
+                break
