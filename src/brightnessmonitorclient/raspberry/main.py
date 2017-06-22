@@ -12,7 +12,7 @@ from daylight import *
 # Interval in seconds the programm is getting new data
 measureINTERVAL = 5
 # Interval in seconds the programm sends data to server
-uploadINTERVAL = 60
+uploadINTERVAL = 300
 # Semaphore for database read/write
 pool_sema = threading.BoundedSemaphore(value=1)
 
