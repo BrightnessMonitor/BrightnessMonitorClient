@@ -45,21 +45,7 @@ bash <(wget -qO- https://raw.githubusercontent.com/BrightnessMonitor/BrightnessM
 
 ### CLI
 ```bash
-brightnessmonitorclient
-```
-
-### add as a Cronjob
-
-Open crontab
-
-```bash
-crontab -e
-```
-
-And add for execute every 15 minutes:
-
-```bash
-*/15 * * * * python /usr/local/lib/python2.7/dist-packages/brightnessmonitorclient
+sudo brightnessmonitorclient
 ```
 
 ## Config
