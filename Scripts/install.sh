@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Install pip
+sudo apt-get -y install python-pip 
+
 # Install programm
 sudo pip install git+git://github.com/BrightnessMonitor/BrightnessMonitorClient.git --upgrade --force
 
