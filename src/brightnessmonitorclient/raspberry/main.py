@@ -1,19 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import threading
-from sys import stdout
-
 from dbController import *
 from getRawData import RCtime
 import signal
 import time
 from brightnessmonitorclient.api_client.update import *
 from timeConvert import convertback
+from daylight import *
 
 # Interval in seconds the programm is getting new data
 measureINTERVAL = 5
 # Interval in seconds the programm sends data to server
-uploadINTERVAL = 5 * 60
+uploadINTERVAL = 60
 # Semaphore for database read/write
 pool_sema = threading.BoundedSemaphore(value=1)
 
@@ -39,6 +38,12 @@ class uploadHandler(threading.Thread):
         while True:
             print "Wait %i seconds for next upload" % uploadINTERVAL
             for i in range(uploadINTERVAL):
+
+                upload_time_left = uploadINTERVAL - i
+                # print every 10 secounds the remaining time
+                if upload_time_left % 10 == 0:
+                    print("time left: %i" % upload_time_left)
+
                 time.sleep(1)
                 if killer.kill_now:
                     break
@@ -58,6 +63,8 @@ class uploadHandler(threading.Thread):
                     print "Upload successful"
                     drop_recreate_db()
                     pool_sema.release()
+            else:
+                print("no connection to the server")
 
             if killer.kill_now:
                 delete()
@@ -68,14 +75,15 @@ def start():
     thread1 = uploadHandler()
     thread1.start()
     create()
+    setLocation()
     while True:
-        pool_sema.acquire()
-        data = RCtime()
-        insert(data)
-        pool_sema.release()
-        print "Current brightness: %i" % data
-        time.sleep(measureINTERVAL)
+        while checkDaylight():
+            pool_sema.acquire()
+            data = RCtime()
+            insert(data)
+            pool_sema.release()
+            print "Current brightness: %i" % data
+            time.sleep(measureINTERVAL)
 
-        if killer.kill_now:
-            print "Please let the program finish or data loss will occur!"
-            break
+            if killer.kill_now:
+                print "Please let the program finish or data loss will occur!"
