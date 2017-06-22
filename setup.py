@@ -55,6 +55,7 @@ setup(
     packages=find_packages('src'),
     install_requires=[
         "pathlib >= 1.0.1",
+        "pytz >= 2017.2",
     ],
     extras_require={
         'dev': [
