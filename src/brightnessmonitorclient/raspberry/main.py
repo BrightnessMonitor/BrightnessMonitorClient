@@ -86,7 +86,6 @@ def start():
             pool_sema.release()
             print "Current brightness: %i" % data
             time.sleep(measureINTERVAL)
-
-            if killer.kill_now:
-                print "Please let the program finish or data loss will occur!"
-                sys.exit(0)
+        if killer.kill_now:
+            print "Please let the program finish or data loss will occur!"
+            sys.exit(0)
