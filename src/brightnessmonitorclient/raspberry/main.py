@@ -87,3 +87,4 @@ def start():
 
             if killer.kill_now:
                 print "Please let the program finish or data loss will occur!"
+                sys.exit(0)
