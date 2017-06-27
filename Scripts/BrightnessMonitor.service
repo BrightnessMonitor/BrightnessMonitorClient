@@ -7,6 +7,9 @@ Type=simple
 ExecStart=/usr/bin/python /usr/local/lib/python2.7/dist-packages/brightnessmonitorclient
 User=brightnes
 Restart=on-abort
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=BrightnessMonior
  
 [Install]
 WantedBy=multi-user.target
