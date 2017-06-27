@@ -69,6 +69,7 @@ class uploadHandler(threading.Thread):
 
             if killer.kill_now:
                 delete()
+                print "Upload thread: killed"
                 sys.exit(0)
 
 
