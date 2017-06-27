@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # remove the service
+
+echo "Waiting for service to stop"
+sudo systemctl stop BrightnessMonitor.service
 sudo systemctl disable BrightnessMonitor.service
 sudo rm /lib/systemd/system/BrightnessMonitor.service
 sudo systemctl daemon-reload
