@@ -26,7 +26,6 @@ class GracefulKiller:
 
     def exit_gracefully(self, signum, frame):
         self.kill_now = True
-        print "Recieved kill signal"
 
 
 killer = GracefulKiller()
@@ -47,6 +46,7 @@ class uploadHandler(threading.Thread):
 
                 time.sleep(1)
                 if killer.kill_now:
+                    print "Upload thread: I recieved a kill signal"
                     break
 
             if internet_on():
