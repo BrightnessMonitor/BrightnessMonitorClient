@@ -23,8 +23,6 @@ def getSunset():
 
 def checkDaylight():
     if getSunrise() < datetime.datetime.now().time() < getSunset():
-        print("sun is up")
         return True
     else:
-        print("sun is down")
         return False
