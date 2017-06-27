@@ -23,6 +23,8 @@ def create():
     try:
         con = lite.connect(sqlite_file)
         cur = con.cursor()
+    except lite.OperationalError:
+        print "create(): Error %s:" % lite.OperationalError.args[0]
     except lite.Error, e:
         print "create(): Error %s:" % e.args[0]
         sys.exit(1)
@@ -52,6 +54,8 @@ def insert(rawdata):
         cur.execute("INSERT INTO {table} VALUES ({time}, {data})".
                     format(table=table, time=int(time.time()), data= rawdata))
         con.commit()
+    except lite.OperationalError:
+        print "insert(): Error %s:" % lite.OperationalError.args[0]
     except lite.Error, e:
         print "insert(): Error %s:" % e.args[0]
         sys.exit(1)
@@ -64,6 +68,8 @@ def retrieve():
     try:
         con = lite.connect(sqlite_file)
         cur = con.cursor()
+    except lite.OperationalError:
+        print "retrieve(): Error %s:" % lite.OperationalError.args[0]
     except lite.Error, e:
         print "retrieve(): Error %s:" % e.args[0]
         sys.exit(1)
@@ -79,8 +85,10 @@ def delete():
     try:
         con = lite.connect(sqlite_file)
         cur = con.cursor()
+    except lite.OperationalError:
+        print "delete(): Error %s:" % lite.OperationalError.args[0]
     except lite.Error, e:
-        print "Error %s:" % e.args[0]
+        print "delete: Error %s:" % e.args[0]
         sys.exit(1)
     with con:
         cur.execute("DROP TABLE IF EXISTS data")
