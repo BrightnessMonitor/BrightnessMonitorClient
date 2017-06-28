@@ -41,8 +41,8 @@ class uploadHandler(threading.Thread):
 
                 upload_time_left = uploadINTERVAL - i
                 # print every 10 secounds the remaining time
-                if upload_time_left % 10 == 0:
-                    print("time left: %i" % upload_time_left)
+                #if upload_time_left % 10 == 0:
+                #    print("time left: %i" % upload_time_left)
 
                 time.sleep(1)
                 if killer.kill_now:
@@ -53,12 +53,12 @@ class uploadHandler(threading.Thread):
                 pool_sema.acquire()
 
                 fail = 0
-                print "Upload ",
+                print "Upload..."
                 for row in retrieve():
                     if not upload(row[1], convertback(row[0])):
                         fail += 1
-                    print "*",
-                print "\n"
+                    #print "*",
+                #print "\n"
 
                 if fail < 1:
                     print "Upload successful"
@@ -72,14 +72,32 @@ class uploadHandler(threading.Thread):
                 print "Upload thread: killed"
                 sys.exit(0)
 
+class DaylightCheck(threading.Thread):
+    sunUp = None
+    def run(self):
+        while True:
+            DaylightCheck.sunUp = checkDaylight()
+            print "Calculating if sun is up"
+            checkINTERVALL = 5 * 60
+            for i in range(checkINTERVALL):
+                if killer.kill_now:
+                    print "DaylightCheck thread: I recieved a kill signal"
+                    sys.exit(0)
+                time.sleep(1)
+    def getLight(self):
+        return DaylightCheck.sunUp
+
+
 
 def start():
     thread1 = uploadHandler()
+    thread2 = DaylightCheck()
     thread1.start()
+    thread2.start()
     create()
     setLocation()
     while True:
-        while checkDaylight():
+        if thread2.getLight():
             pool_sema.acquire()
             data = RCtime()
             insert(data)

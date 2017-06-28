@@ -27,6 +27,10 @@ def checkDaylight():
     else:
         return False
 
-s = sunrise.sun(52.469769, 13.424967)
-print s.sunrise(when=datetime.datetime.now(tz=currenttz))
-print s.sunset(when=datetime.datetime.now(tz=currenttz))
+#s = sunrise.sun(52.469769, 13.424967)
+#print s.sunrise(when=datetime.datetime.now(tz=currenttz))
+#print s.sunset(when=datetime.datetime.now(tz=currenttz))
+#print datetime.datetime.now().time()
+
+#print getSunrise() < datetime.datetime.now().time()
+#print datetime.datetime.now().time() < getSunset()
